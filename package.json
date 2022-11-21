@@ -1,0 +1,23 @@
+{
+    "name": "mensamenueapi",
+    "version": "0.0.1",
+    "description": "Api to get menues of mensas",
+    "main": "app.js",
+    "scripts": {
+        "start": "node src/app.js",
+        "dev": "nodemon src/app.js",
+        "dev-fiddler": "set FIDDLER=true && nodemon src/app.js"
+
+    },
+    "keywords": [],
+    "author": "noel baechler",
+    "dependencies": {
+        "axios": "^0.27.2",
+        "dom-parser": "^0.1.6",
+        "express": "^4.18.1",
+        "node-fetch": "^3.2.10"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.19"
+    }
+}
