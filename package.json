@@ -7,7 +7,6 @@
         "start": "node src/app.js",
         "dev": "nodemon src/app.js",
         "dev-fiddler": "set FIDDLER=true && nodemon src/app.js"
-
     },
     "keywords": [],
     "author": "noel baechler",
