@@ -1,4 +1,4 @@
-# Mensa Menu Api
+# Mensa Buddy Api
 
 This is a Api to fetch the menu plans of mensas. The Api is built with [NodeJS](https://nodejs.org/) and [express](https://github.com/expressjs/express).
 
