@@ -1,4 +1,4 @@
-# Mensa Buddy Api
+# Mensa <span style="color:rgb(255, 119, 171)">Buddy</span> Api
 
 This is a Api to fetch the menu plans of mensas. The Api is built with [NodeJS](https://nodejs.org/) and [express](https://github.com/expressjs/express).
 
