@@ -13,6 +13,20 @@ npm run dev
 
 *Note that [Nodemon](https://www.npmjs.com/package/nodemon) is active when you run the project in development. Nodemon restarts the nodeserver after changes have been made.*
 
+### Fiddler
+
+You can run the project with fiddler. To run it with fiddler, use following npm-script command:
+
+```bash
+# Run in developement mode with fiddler
+npm run dev-fiddler
+```
+
+You can modify the fiddler config [here](src/config/fiddler-config.js). 
+
+*Note that you have to enable the protocol **tls1.2** in fiddler -> tools -> options -> https*
+
+
 ## Run in production mode
 ```bash
 # Install dependencies
