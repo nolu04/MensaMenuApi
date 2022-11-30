@@ -25,9 +25,45 @@ const get = (req, res) => {
 
         default:
             res.status(404)
-            res.send({error: `There is no endpoint for the mensa '${name}'`})
+            res.send({ error: `There is no endpoint for the mensa '${name}'` })
             break
     }
+}
+
+/**
+ * Gets all available mensas
+ * @param {*} req the request object
+ * @param {*} res the result object to send the reponse to
+ */
+const getAll = (req, res) => {
+    axios
+        .get('https://bits-and-beiz.sv-restaurant.ch/de/menuplan/persrest-data.json')
+        .then(result => {
+            try {
+                // Reads the items
+                let items = result.data.items;
+
+                // Maps the objects in the array to a new object
+                items = items.map(x => ({
+                    name: x.name,
+                    address: getAddressObject(x.address),
+                    link: x.link
+                }));
+
+                // Sends the items to the client
+                res.send(items);
+            } catch (error) {
+                res.status(500);
+                res.send({ error: 'Error while processing the data from the mensa website' })
+            }
+
+        })
+        .catch(error => { // Catches all error while fetching the data from the mensa website
+            console.log(error);
+            console.log(error.data);
+            res.status(502)
+            res.send({ error: 'Error while fetching data from the mensa website' })
+        });
 }
 
 const getEngehalde = (req, res) => {
@@ -64,14 +100,14 @@ const getSVRestaurant = (req, res, mensaUrl) => {
                 // Convert the HTML string into a document object
                 let parser = new DomParser();
                 let doc = parser.parseFromString(result.data, 'text/html');
-                
+
                 let days = doc.getElementsByClassName('menu-plan-grid')
                 let response = []
-    
+
                 days.map((day, index) => {
-    
+
                     let dayObjects = getDayObjects(doc)
-    
+
                     response.push({
                         day: dayObjects[index].day,
                         date: dayObjects[index].date,
@@ -84,19 +120,68 @@ const getSVRestaurant = (req, res, mensaUrl) => {
                 console.error('Error while processing the data from the mensa website');
                 console.error(error);
                 res.status(500)
-                res.send({error: 'Error while processing the data from the mensa website'})
+                res.send({ error: 'Error while processing the data from the mensa website' })
             }
 
-            
+
         })
         .catch(error => { // Catches all error while fetching the data from the mensa website
             console.log(error);
             console.log(error.data);
-            res.status(500)
-            res.send({error: 'Error while fetching data from the mensa website'})
+            res.status(502)
+            res.send({ error: 'Error while fetching data from the mensa website' })
         });
 }
 
+/**
+ * Parse a address string to a address object
+ * @param {string} address The address string
+ * @returns a address object
+ */
+const getAddressObject = (address) => {
+    let array = address.split('\n');
+
+    switch (array.length) {
+        case 2:
+            array = ['', array[0], array[1]];
+            break;
+        case 1:
+            return {
+                postalCode: '',
+                city: '',
+                street: ''
+            };
+        case 0:
+            return {
+                postalCode: '',
+                city: '',
+                street: ''
+            };
+    }
+
+
+    let street = array[1];
+
+    console.log('0:', array[0]);
+    console.log('1:', array[1]);
+    console.log('2:', array[2]);
+
+
+
+    let postalCode = array[2].split(' ')[0];
+    let city = array[2]
+        .split(' ')
+        .slice(1)
+        .join(' ');
+
+    return {
+        postalCode: postalCode,
+        city: city,
+        street: street
+    }
+}
+
 module.exports = {
-    get
+    get,
+    getAll
 }

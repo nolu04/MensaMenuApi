@@ -16,7 +16,7 @@ if (process.env.FIDDLER) {
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 // Mensa routes
-app.use(`${API_BASE_URL}/mensa`, mensaRoutes)
+app.use(`${API_BASE_URL}/mensas`, mensaRoutes)
 
 app.listen(port, () => {
     console.log(`Server listening on port: ${port}`);
