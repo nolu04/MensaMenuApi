@@ -37,7 +37,7 @@ npm run start
 
 ## Api Endpoints
 
-### GET /api/mensa/{name}
+### GET /api/mensas/menuplan/{name}
 
 Gets the menu plans of a mensa, which is identified by the param 'name'
 
@@ -90,5 +90,54 @@ Gets the menu plans of a mensa, which is identified by the param 'name'
 
 **Response Status 500**
 
-This error may occur while processing the data from the mensa-website. (E.g the website structure of the mensa changed)
+This error may occur while processing the data from the mensa-website. (E.g the website structure of the mensa changed).
 
+**Response Status 502**
+
+This error may occur, when the mensa-website is unavailable or return an error.
+
+</br>
+
+### GET /api/mensas
+
+Gets all available mensas
+
+**Response - Status 200**
+
+<details>
+<summary>Description</summary>
+
+- `body`: An array with objects
+    - `name`: The name of the mensa. E.g "Restaurant bits&beiz"
+    - `address`: A object of the address of the mensa (can have empty attributes)
+        - `postalCode`: The postal-code of the address
+        - `city`: The city name of the address
+        - `street`: The street of the address (with houses number)
+    - `link`: The link of the website (can be a empty string)
+
+</details>
+</br>
+
+  **Example**
+
+```
+[
+    {
+        "name": "string",
+        "address": {
+            "postalCode": "string",
+            "city": "string",
+            "street": "string"
+        }
+        "link": "string"
+    }
+]
+```
+
+**Response Status 500**
+
+This error may occur while processing the data from the mensa-website. (E.g the response structure of the api changed).
+
+**Response Status 502**
+
+This error may occur, when the mensa-website is unavailable or return an error.
