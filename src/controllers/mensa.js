@@ -159,14 +159,7 @@ const getAddressObject = (address) => {
             };
     }
 
-
     let street = array[1];
-
-    console.log('0:', array[0]);
-    console.log('1:', array[1]);
-    console.log('2:', array[2]);
-
-
 
     let postalCode = array[2].split(' ')[0];
     let city = array[2]

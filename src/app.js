@@ -2,8 +2,13 @@ const express = require('express');
 const { API_BASE_URL } = require('./config/constants');
 const mensaRoutes = require('./routes/mensa')
 const { setFiddlerProxy } = require('./config/fiddler-config');
+const cors = require('cors');
+const { corsConfig } = require('./config/cors-config');
 
 const app = express()
+
+// Cors config
+app.use(cors(corsConfig))
 
 // Gets Port from environement variable
 const port = process.env.PORT || 8080
