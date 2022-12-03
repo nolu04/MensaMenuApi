@@ -39,11 +39,11 @@ npm run start
 
 ### GET /api/mensas/menuplan/{name}
 
-Gets the menu plans of a mensa, which is identified by the param 'name'
+Gets the menu plans of a mensa, which is identified by the param 'website'
 
 |Name |Type  | Description|
 --- | --- | --- |
-| `name` | string | The name of the mensa. Valid values: 'engehalde', 'zollikofen', 'wankdorf', 'zofingen' |
+| `website` | string | The subdomain of the mensa E.g "bits-and-beiz" |
 
 **Response - Status 200**
 
@@ -54,7 +54,7 @@ Gets the menu plans of a mensa, which is identified by the param 'name'
     - `day`: Abrevation of the day e.g friday -> FR
     - `date`: Date in the format DD.MM. e.g 20.07
     - `menus`: An array with the menu-objects
-        - `type`: The type of the menu e.g 'Postino' or 'Green'
+        - `type`: The type of the menu e.g 'Postino' or 'Green', can be empty
         - `title`: -
         - `description`: -
         - `prices`: An array with the prices of the menu
