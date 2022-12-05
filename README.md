@@ -37,7 +37,7 @@ npm run start
 
 ## Api Endpoints
 
-### GET /api/mensas/menuplan/{name}
+### GET /api/mensas/menuplan/{website}
 
 Gets the menu plans of a mensa, which is identified by the param 'website'
 
