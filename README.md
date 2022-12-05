@@ -64,7 +64,7 @@ Gets the menu plans of a mensa, which is identified by the param 'website'
 </details>
 </br>
 
-  **Example**
+**Example**
 
 ```
 [
@@ -86,6 +86,26 @@ Gets the menu plans of a mensa, which is identified by the param 'website'
         ]
     }
 ]
+```
+
+**Response Status 404**
+
+This error occurs, when the requested mensa does not exist.
+
+<details>
+<summary>Description</summary>
+
+- `body`: A object
+    - `error`: A error message which tells, that the requested mensa does not exist
+</details>
+</br>
+
+**Example**
+
+```
+{
+    "error": string
+}
 ```
 
 **Response Status 500**
@@ -118,7 +138,7 @@ Gets all available mensas
 </details>
 </br>
 
-  **Example**
+**Example**
 
 ```
 [
