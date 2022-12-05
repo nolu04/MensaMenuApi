@@ -4,7 +4,7 @@ const { getDayObjects, getMenus } = require('../util/svRestaurant');
 
 const get = (req, res) => {
     let website = req.params.website
-    getSVRestaurant(req, res, `https://${website}.sv-restaurant.ch/de/menuplan`)
+    getSVRestaurant(req, res, `https://${website}.sv-restaurant.ch/de/menuplan/`)
 }
 
 /**
@@ -81,9 +81,13 @@ const getSVRestaurant = (req, res, mensaUrl) => {
 
 
         })
-        .catch(error => { // Catches all error while fetching the data from the mensa website
-            console.log(error);
-            console.log(error.data);
+        .catch(error => {
+            if (error?.response?.status === 404) {
+                res.status(404)
+                res.send({error: `The mensa ${mensaUrl} does not exists!`})
+            } 
+            // Catches all error while fetching the data from the mensa website
+            console.log(error?.response?.status);
             res.status(502)
             res.send({ error: 'Error while fetching data from the mensa website' })
         });
