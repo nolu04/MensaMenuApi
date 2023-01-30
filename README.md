@@ -24,7 +24,7 @@ npm run dev-fiddler
 
 You can modify the fiddler config [here](src/config/fiddler-config.js). 
 
-*Note that you have to enable the protocol **tls1.2** in fiddler -> tools -> options -> https*
+*Note that you have to enable the protocol **tls1.2** in fiddler -> tools -> options -> https and **Automatically Authenticate** fiddler -> Rules -> Automatically Authenticate*
 
 
 ## Run in production mode
