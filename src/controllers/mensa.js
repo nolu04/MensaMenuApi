@@ -26,6 +26,16 @@ const getAll = (req, res) => {
                     address: getAddressObject(x.address),
                     link: x.link
                 }));
+                // Because it doesn't contain this item
+                items.push({
+                    name: 'Restaurant Engehalde',
+                    address: {
+                        postalCode: 3012,
+                        city: 'Bern',
+                        street: 'Engehaldenstrasse 35'
+                    },
+                    link: 'https://restaurant-engehalde.sv-restaurant.ch'
+                })
 
                 // Sends the items to the client
                 res.send(items);
