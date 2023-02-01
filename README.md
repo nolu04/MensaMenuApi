@@ -24,7 +24,7 @@ npm run dev-fiddler
 
 You can modify the fiddler config [here](src/config/fiddler-config.js). 
 
-*Note that you have to enable the protocol **tls1.2** in fiddler -> tools -> options -> https*
+*Note that you have to enable the protocol **tls1.2** in fiddler -> tools -> options -> https and **Automatically Authenticate** fiddler -> Rules -> Automatically Authenticate*
 
 
 ## Run in production mode
@@ -37,13 +37,13 @@ npm run start
 
 ## Api Endpoints
 
-### GET /api/mensas/menuplan/{name}
+### GET /api/mensas/menuplan/{website}
 
-Gets the menu plans of a mensa, which is identified by the param 'name'
+Gets the menu plans of a mensa, which is identified by the param 'website'
 
 |Name |Type  | Description|
 --- | --- | --- |
-| `name` | string | The name of the mensa. Valid values: 'engehalde', 'zollikofen', 'wankdorf', 'zofingen' |
+| `website` | string | The subdomain of the mensa E.g "bits-and-beiz" |
 
 **Response - Status 200**
 
@@ -54,7 +54,7 @@ Gets the menu plans of a mensa, which is identified by the param 'name'
     - `day`: Abrevation of the day e.g friday -> FR
     - `date`: Date in the format DD.MM. e.g 20.07
     - `menus`: An array with the menu-objects
-        - `type`: The type of the menu e.g 'Postino' or 'Green'
+        - `type`: The type of the menu e.g 'Postino' or 'Green', can be empty
         - `title`: -
         - `description`: -
         - `prices`: An array with the prices of the menu
@@ -64,7 +64,7 @@ Gets the menu plans of a mensa, which is identified by the param 'name'
 </details>
 </br>
 
-  **Example**
+**Example**
 
 ```
 [
@@ -86,6 +86,26 @@ Gets the menu plans of a mensa, which is identified by the param 'name'
         ]
     }
 ]
+```
+
+**Response Status 404**
+
+This error occurs, when the requested mensa does not exist.
+
+<details>
+<summary>Description</summary>
+
+- `body`: A object
+    - `error`: A error message which tells, that the requested mensa does not exist
+</details>
+</br>
+
+**Example**
+
+```
+{
+    "error": string
+}
 ```
 
 **Response Status 500**
@@ -118,7 +138,7 @@ Gets all available mensas
 </details>
 </br>
 
-  **Example**
+**Example**
 
 ```
 [

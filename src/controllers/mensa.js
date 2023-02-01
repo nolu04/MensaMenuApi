@@ -3,31 +3,8 @@ const DomParser = require('dom-parser');
 const { getDayObjects, getMenus } = require('../util/svRestaurant');
 
 const get = (req, res) => {
-
-    let name = req.params.name
-
-    switch (name) {
-        case 'engehalde':
-            getEngehalde(req, res)
-            break
-
-        case 'zollikofen':
-            getZollikofen(req, res)
-            break
-
-        case 'wankdorf':
-            getWankdorf(req, res)
-            break
-
-        case 'zofingen':
-            getZofingen(req, res)
-            break
-
-        default:
-            res.status(404)
-            res.send({ error: `There is no endpoint for the mensa '${name}'` })
-            break
-    }
+    let website = req.params.website
+    getSVRestaurant(req, res, `https://${website}.sv-restaurant.ch/de/menuplan/`)
 }
 
 /**
@@ -66,28 +43,7 @@ const getAll = (req, res) => {
         });
 }
 
-const getEngehalde = (req, res) => {
-    const mensaUrl = 'https://restaurant-engehalde.sv-restaurant.ch/de/menuplan/'
-    getSVRestaurant(req, res, mensaUrl)
-}
-
-const getZollikofen = (req, res) => {
-    const mensaUrl = 'https://bits-and-beiz.sv-restaurant.ch/de/menuplan/'
-    getSVRestaurant(req, res, mensaUrl)
-}
-
-const getWankdorf = (req, res) => {
-    const mensaUrl = 'https://restaurant-espace.sv-restaurant.ch/de/menuplan/'
-    getSVRestaurant(req, res, mensaUrl)
-}
-
-const getZofingen = (req, res) => {
-    const mensaUrl = 'https://panaroma-elements.sv-restaurant.ch/de/menuplan/'
-    getSVRestaurant(req, res, mensaUrl)
-}
-
 const getSVRestaurant = (req, res, mensaUrl) => {
-
     axios
         .get(mensaUrl)
         .then(result => {
@@ -125,9 +81,13 @@ const getSVRestaurant = (req, res, mensaUrl) => {
 
 
         })
-        .catch(error => { // Catches all error while fetching the data from the mensa website
-            console.log(error);
-            console.log(error.data);
+        .catch(error => {
+            if (error?.response?.status === 404) {
+                res.status(404)
+                res.send({error: `The mensa ${mensaUrl} does not exists!`})
+            } 
+            // Catches all error while fetching the data from the mensa website
+            console.log(error?.response?.status);
             res.status(502)
             res.send({ error: 'Error while fetching data from the mensa website' })
         });

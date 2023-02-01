@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('', mensaController.getAll)
 
-router.get('/menuplan/:name', mensaController.get)   
+router.get('/menuplan/:website', mensaController.get)   
 
 
 module.exports = router 

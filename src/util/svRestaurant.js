@@ -24,7 +24,7 @@ const getMenus = (dayDoc) => {
 
 const getMenuObject = (menuDoc) => {
     return ({
-        type: menuDoc.getElementsByClassName('menuline')[0].innerHTML,
+        type: menuDoc.getElementsByClassName('menuline')[0]?.innerHTML ?? '',
         title: menuDoc.getElementsByClassName('menu-title')[0].innerHTML.replace(/&shy;/g, ''),
         description: menuDoc.getElementsByClassName('menu-description')[0].innerHTML
             .replace(/<br\/>/g, '') // replaces <br/> tags
